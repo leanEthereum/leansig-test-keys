@@ -44,9 +44,9 @@ package:
 
 	# Compress the key files
 	@echo "==> Compressing test scheme keys..."
-	tar -czf release/test_scheme.tar.gz test_scheme/
+	tar -czf release/test_scheme.tar.gz test_scheme/*.json
 	@echo "==> Compressing prod scheme keys..."
-	tar -czf release/prod_scheme.tar.gz prod_scheme/
+	tar -czf release/prod_scheme.tar.gz prod_scheme/*.json
 
 	# Success message
 	@echo "==> Done! Archives created in release/ folder:"

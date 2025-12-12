@@ -42,11 +42,11 @@ package:
 	@echo "==> Creating release folder..."
 	mkdir -p release
 
-	# Compress the key files
+	# Compress the key files (excluding hidden files like .DS_Store and ._* files)
 	@echo "==> Compressing test scheme keys..."
-	tar -czf release/test_scheme.tar.gz test_scheme/*.json
+	tar -czf release/test_scheme.tar.gz --exclude='*/.*' test_scheme/*.json
 	@echo "==> Compressing prod scheme keys..."
-	tar -czf release/prod_scheme.tar.gz prod_scheme/*.json
+	tar -czf release/prod_scheme.tar.gz --exclude='*/.*' prod_scheme/*.json
 
 	# Success message
 	@echo "==> Done! Archives created in release/ folder:"

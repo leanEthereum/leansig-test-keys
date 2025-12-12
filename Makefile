@@ -42,11 +42,11 @@ package:
 	@echo "==> Creating release folder..."
 	mkdir -p release
 
-	# Compress the key files (excluding hidden files like .DS_Store and ._* files)
+	# Compress the key files (COPYFILE_DISABLE prevents ._* AppleDouble metadata files)
 	@echo "==> Compressing test scheme keys..."
-	tar -czf release/test_scheme.tar.gz --exclude='*/.*' test_scheme/*.json
+	COPYFILE_DISABLE=1 tar -czf release/test_scheme.tar.gz test_scheme/*.json
 	@echo "==> Compressing prod scheme keys..."
-	tar -czf release/prod_scheme.tar.gz --exclude='*/.*' prod_scheme/*.json
+	COPYFILE_DISABLE=1 tar -czf release/prod_scheme.tar.gz prod_scheme/*.json
 
 	# Success message
 	@echo "==> Done! Archives created in release/ folder:"

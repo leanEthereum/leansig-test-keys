@@ -1,15 +1,16 @@
 LEAN_SPEC_REPO_URL := https://github.com/leanEthereum/leanSpec
 LEAN_SPEC_REPO_DIR := leanSpec
 
-.PHONY: install test prod release clean tag help
+.PHONY: install test prod package tag release clean help
 
 help:
 	@echo "Usage:"
 	@echo "  make install - Clone leanSpec repository"
 	@echo "  make test    - Generate keys for test scheme"
 	@echo "  make prod    - Generate keys for prod scheme"
-	@echo "  make release - Generate keys and create tar.gz archives (test_scheme.tar.gz, prod_scheme.tar.gz)"
+	@echo "  make package - Create tar.gz archives from existing test_scheme/ and prod_scheme/ folders"
 	@echo "  make tag     - Display leanSpec HEAD commit as leanSpec-<commit>, useful for tagging a release"
+	@echo "  make release - Generate keys (test & prod) and create tar.gz archives"
 	@echo "  make clean   - Remove cloned leanSpec repository and release folder"
 
 install:
@@ -36,7 +37,7 @@ prod: install
 	cp -r $(LEAN_SPEC_REPO_DIR)/prod_scheme/* prod_scheme/
 	@echo "==> Done! Keys generated in prod_scheme/ folder"
 
-release: test prod
+package:
 	# Create release folder
 	@echo "==> Creating release folder..."
 	mkdir -p release
@@ -58,6 +59,8 @@ tag:
 		exit 1; \
 	fi
 	@cd $(LEAN_SPEC_REPO_DIR) && echo "leanSpec-$$(git rev-parse --short HEAD)"
+
+release: test prod package tag
 
 clean:
 	@echo "==> Removing $(LEAN_SPEC_REPO_DIR)..."

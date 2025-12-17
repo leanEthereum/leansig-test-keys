@@ -2,15 +2,17 @@ LEAN_SPEC_REPO_URL := https://github.com/leanEthereum/leanSpec
 LEAN_SPEC_REPO_DIR := leanSpec
 
 .PHONY: install test prod package tag release clean help
+.DEFAULT_GOAL := release
 
 help:
 	@echo "Usage:"
+	@echo "  make         - Alias for \`make release\`"
 	@echo "  make install - Clone leanSpec repository"
 	@echo "  make test    - Generate keys for test scheme"
 	@echo "  make prod    - Generate keys for prod scheme"
 	@echo "  make package - Create tar.gz archives from existing test_scheme/ and prod_scheme/ folders"
+	@echo "  make release - Run the entire workflow, from installing dependencies, key generation, to creating archives"
 	@echo "  make tag     - Display leanSpec HEAD commit as leanSpec-<commit>, useful for tagging a release"
-	@echo "  make release - Generate keys (test & prod) and create tar.gz archives"
 	@echo "  make clean   - Remove cloned leanSpec repository and release folder"
 
 install:
